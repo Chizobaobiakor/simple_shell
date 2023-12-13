@@ -9,10 +9,9 @@
 #include <sys/wait.h>
 #include <sys/stat.h>
 #include <limits.h>
+#include <signal.h>
 #include <fcntl.h>
 #include <stdlib.h>
-
-#define BUFFER_SIZE 1024
 
 /**
  * struct Built_in - Structure of command and function

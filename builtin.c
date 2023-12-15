@@ -35,50 +35,6 @@ int handle_builtins(char **argv, char **env, char **token_array)
 
 	return (check);
 }
-
-/**
- * exit_func - Builtin function that terminates current process
- * @argv: Argument vector from command line
- * @env: Environment variables
- * @token_array: Array of user entry token
- */
-
-void exit_func(char **argv, char **env, char **token_array)
-{
-	int status2;
-
-	(void)env;
-
-	if (token_array[1] && _strstr(token_array[1], "New\nLine"))
-	{
-		err_msg(2, 1, argv[0], token_array[0], "Illegal number: New\nLine");
-		free_array_tokens(token_array);
-		errno = 2;
-		exit(errno);
-	}
-	if (token_array[1] && _strstr(token_array[1], "-98"))
-	{
-		err_msg(2, 1, argv[0], token_array[0], "Illegal number: -98");
-		free_array_tokens(token_array);
-		errno = 2;
-		exit(errno);
-	}
-	if (token_array[1])
-	{
-		status2 = atoi(token_array[1]);
-		free_array_tokens(token_array);
-		errno = status2;
-		exit(errno);
-	}
-	if (errno != 0)
-	{
-		free_array_tokens(token_array);
-		exit(2);
-	}
-	free_array_tokens(token_array);
-	exit(errno);
-}
-
 /**
  * cd_func - Builtin function that changes current directory
  * @argv: Argument vector from command line

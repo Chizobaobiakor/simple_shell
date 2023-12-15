@@ -26,7 +26,7 @@ int handle_builtins(char **argv, char **env, char **token_array)
 	{
 		if (_strcmp(token_array[0], builtin_ptr[z]->cmd) == 0)
 		{
-			builtin_ptr[i]->fnc_cmd(argv, env, token_array);
+			builtin_ptr[z]->fnc_cmd(argv, env, token_array);
 			check = 1;
 			break;
 		}

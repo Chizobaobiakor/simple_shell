@@ -25,6 +25,19 @@ struct builtin_command
 	int (*function)(char **array_of_tokens);
 };
 
+char **strtow(char *str, char *d);
+char **strtow2(char *str, char d);
+void rev_string(char *str);
+char *_itoa(size_t command_num);
+int handle_builtins(char **argv, char **env, char **token_array);
+void exit_func(char **argv, char **env, char **token_array);
+void cd_func(char **argv, char **env, char **token_array);
+void env_func(char **argv, char **env, char **token_array);
+void prompt(void);
+ssize_t _getline(char **input,
+                size_t *number_of_malloc_bytes_allocated, int status)
+
+
 
 void prompt(void);
 void sigint_handler(int signal);

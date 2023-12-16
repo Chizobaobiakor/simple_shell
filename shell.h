@@ -1,5 +1,6 @@
 #ifndef SHELL_H
 #define SHELL_H
+#define EXIT CODE(1080)
 
 #include <stdio.h>
 #include <errno.h>
@@ -8,70 +9,47 @@
 #include <sys/types.h>
 #include <sys/wait.h>
 #include <sys/stat.h>
-#include <limits.h>
-#include <signal.h>
-#include <fcntl.h>
 #include <stdlib.h>
+#include <signal.h>
 
 /**
- * struct Built_in - Structure of command and function
- * @cmd: Command to be compared and function called
- * @fnc_cmd: Function to be called when command matches
+ * struct builtin_command - Short description
+ * @name: First member
+ * @function: Second member
+ *
+ * Description: Longer description
  */
-
-typedef struct Built_in
+struct builtin_command
 {
-	char *cmd;
-	void (*fnc_cmd)(char **argv, char **env, char **token_array);
-} Built_in;
+	char *name;
+	int (*function)(char **array_of_tokens);
+};
 
-/*digits and atoi*/
-int _atoi(char *s);
-int _isdigit(int c);
-/*extern char **environ;*/
-/* Builtin functions handler */
 
-void env_func(char **argv, char **env, char **token_array);
-void cd_func(char **argv, char **env, char **token_array);
-void exit_func(char **argv, char **env, char **token_array);
-
-/*Custom String Function Prototypes*/
-int _strlen(char *s);
-char *_strcpy(char *dest, char *src);
-int _strcmp(char *s1, char *s2);
-char *_strcat(char *dest, char *src);
-char *_strstr(char *haystack, char *needle);
-char *_strdup(char *str);
-
-/*Memory Allocation Prototypes*/
-void *_realloc(void *ptr, unsigned int old_size, unsigned int new_size);
-void free_array_tokens(char **array_tokens);
-
-/*Global status*/
-int status;
-int cmd_count;
-
-/*User-defined Prototypes*/
-char *get_path(char **env);
-char **split_path(char *path_var);
-char *find_str_in_path(char *cmd, char *path);
-char **split_user_input(char *user_input);
-void handle_signal(int signum);
-int handle_builtins(char **argv, char **env, char **token_array);
-int handle_PATH(char **argv, char **env, char **token_array, int *cmd_count);
-void handle_full_Path(char **token_array, char **env, char **argv, int mode);
-void err_msg(int fd, int num_cmd, char *s1, char *s2, char *s3);
-
-/*SPECIAL CASE HANDLER FOR TASK 3*/
-int handle_missing_path27(char *in_path, char **token_array,
-						  char **env, int *mode, int *cmd_count, char **argv);
-
-/*Main program functions*/
-void handle_interactions(char **argv, char **env, int *cmd_count, int *mode);
-/*void handle_non_interactive_mode(char **argv, char **env);*/
-char **process_input(char **argv, int *mode);
-/*File inside handle-non_interactive*/
-
-/*lucyobiakor*/
-
-#endif /*SHELL_H*/ 
+void prompt(void);
+void sigint_handler(int signal);
+ssize_t _getline(char **input,
+		size_t *number_of_malloc_bytes_allocated, int status);
+char **array_maker(char *input, char *delimiter);
+int _fork(char *command, char **array_of_tokens);
+char *_which(char *filename);
+int _print_env(void);
+char *_getenv(const char *name);
+int _setenv(const char *name, const char *value, int overwrite);
+int _unsetenv(const char *name);
+char *malloc_char(char **string, size_t size_of_malloc, char *error_message);
+char **malloc_array(char **array, size_t size_of_malloc, char *error_message);
+int copy_array(char **destination, char **source);
+int _env_name_exists(const char *name);
+int _env_length(void);
+void free_which(char **path_var, char **array_of_tokens);
+void free_main(char **array_of_tokens, char *input);
+void rev_string(char *s);
+char *_itoa(size_t command_num);
+int digit_counter(size_t command_num);
+int error_not_found(char **arvs, char **array_of_tokens, size_t command_num);
+int is_builtin(char **array_of_tokens);
+int builtin_handler(char **array_of_tokens);
+int _exit_builtin(char **array_of_tokens);
+int _env_builtin(char **array_of_tokens);
+#endif

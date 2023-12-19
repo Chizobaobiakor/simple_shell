@@ -10,11 +10,6 @@
 
 int main(int argc, char **argv, char **env)
 {
-	/**
-	 * let's create a variable that
-	 * passes through the interactive mode
-	 * and keep the increment at every call
-	 */
 	int mode = 0;
 
 	cmd_count = 1;

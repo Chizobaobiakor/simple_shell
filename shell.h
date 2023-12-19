@@ -35,7 +35,7 @@ void cd_func(char **argv, char **env, char **token_array);
 void env_func(char **argv, char **env, char **token_array);
 void prompt(void);
 ssize_t _getline(char **input,
-                size_t *number_of_malloc_bytes_allocated, int status)
+		size_t *number_of_malloc_bytes_allocated, int status)
 
 
 
